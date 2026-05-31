@@ -25,7 +25,7 @@ public class ProductRESTController {
         return productRepository.findById(id).orElseThrow(()-> new RuntimeException("ID not found"));
     }
 
-    //Get products with name containingg keyword
+    //Get products with name containing keyword
     @GetMapping("/find/products")
     public List<Product> getProductByKyWord(@RequestParam(name = "kw", defaultValue = "") String kw){
         return productRepository.findByNameContaining(kw);
