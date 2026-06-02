@@ -1,0 +1,2 @@
+net.tp1.ext.DaoImpV2
+net.tp1.metier.MetierImpV1

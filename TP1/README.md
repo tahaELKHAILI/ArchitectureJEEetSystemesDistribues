@@ -11,7 +11,17 @@ Results:
 
 ![ResultPresStatic.png](screenshots/ResultPresStatic.png)
 ### Présentation par instanciation dynamique
+Utilisant la class DaoImpV1:
 
+![fichierConfigDaov1.png](screenshots/fichierConfigDaov1.png)
+
+![ResultDaoV1.png](screenshots/ResultDaoV1.png)
+
+Utilisant la class DaoImpV2:
+
+![fichierConfigDaov2.png](screenshots/fichierConfigDaov2.png)
+
+![ResultDaoV2.png](screenshots/ResultDaoV2.png)
 ### Présentation par Spring
 #### Version XML
 
