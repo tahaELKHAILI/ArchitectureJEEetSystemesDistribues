@@ -30,3 +30,7 @@ Fichier de configuration
 
 ![ResultExecution.png](screenshots/ResultExecution.png)
 #### Version Annotations
+
+![CodeAnnotation.png](screenshots/CodeAnnotation.png)
+
+![ResultVerAnnotation.png](screenshots/ResultVerAnnotation.png)

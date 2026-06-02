@@ -1,5 +1,9 @@
 package net.tp1.dao;
 
+import org.springframework.stereotype.Component;
+
+@Component ("d")
+
 public class DaoImpV1 implements IDao {
     @Override
     public double getData() {
