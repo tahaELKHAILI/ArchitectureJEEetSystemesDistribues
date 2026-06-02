@@ -24,5 +24,9 @@ Utilisant la class DaoImpV2:
 ![ResultDaoV2.png](screenshots/ResultDaoV2.png)
 ### Présentation par Spring
 #### Version XML
+Fichier de configuration
 
+![FichierConfigurationXml.png](screenshots/FichierConfigurationXml.png)
+
+![ResultExecution.png](screenshots/ResultExecution.png)
 #### Version Annotations
