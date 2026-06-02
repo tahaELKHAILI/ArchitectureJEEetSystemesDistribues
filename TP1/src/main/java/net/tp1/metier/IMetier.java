@@ -1,5 +1,5 @@
 package net.tp1.metier;
 
-public interface Imetier {
+public interface IMetier {
     double calcule();
 }
