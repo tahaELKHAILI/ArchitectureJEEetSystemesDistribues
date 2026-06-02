@@ -4,8 +4,11 @@
 ![ImplementationStaticMetier.png](screenshots/ImplementationStaticMetier.png)
 ### Présentation par instanciation static
 Code:
+
 ![PresentationStatic.png](screenshots/PresentationStatic.png)
+
 Results:
+
 ![ResultPresStatic.png](screenshots/ResultPresStatic.png)
 ### Présentation par instanciation dynamique
 
