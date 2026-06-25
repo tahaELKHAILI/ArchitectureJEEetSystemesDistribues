@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+
+  <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.8/css/bootstrap.min.css">
+  <script src="/webjars/bootstrap/5.3.8/js/bootstrap.bundle.js"></script>
+
+</head>
+
+<body class="bg-body-tertiary d-flex align-items-center justify-content-center vh-100">
+
+<div class="container">
+
+  <div class="row justify-content-center">
+
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+
+      <div class="card shadow">
+
+        <div class="card-header text-center py-3">
+          <h4 class="mb-0">Product Management</h4>
+        </div>
+
+        <div class="card-body p-4">
+
+          <div th:if="${param.error}" class="alert alert-danger">
+            Invalid username or password.
+          </div>
+
+          <div th:if="${param.logout}" class="alert alert-success">
+            You have been logged out successfully.
+          </div>
+
+
+          <form method="post" th:action="@{/login}">
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">
+                Username
+              </label>
+
+              <input
+                      type="text"
+                      class="form-control"
+                      name="username"
+                      placeholder="Enter username"
+                      required
+                      autofocus>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-semibold">
+                Password
+              </label>
+
+              <input
+                      type="password"
+                      class="form-control"
+                      name="password"
+                      placeholder="Enter password"
+                      required>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary">
+                Sign In
+              </button>
+            </div>
+
+          </form>
+
+          <hr>
+
+          <div class="alert alert-light mb-0">
+            <strong>Demo Accounts</strong>
+            <br>
+            Admin: <code>admin</code> / <code>1235</code>
+            <br>
+            User: <code>user1</code> / <code>1234</code>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

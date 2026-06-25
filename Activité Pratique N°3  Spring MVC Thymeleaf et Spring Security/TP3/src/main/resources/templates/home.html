@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+    <div class="text-center p-5 mb-4 bg-body-tertiary rounded-3">
+
+        <h1 class="fw-bold">Welcome to My Store</h1>
+
+        <p class="lead mb-0">
+            Manage your products easily and efficiently
+        </p>
+
+    </div>
+
+    <div class="row g-3">
+
+        <!-- PRODUCTS -->
+        <div class="col-md-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body text-center">
+
+                    <h5 class="card-title">Products</h5>
+
+                    <p class="card-text">
+                        View all products with pagination.
+                    </p>
+
+                    <a th:href="@{/user/index}" class="btn btn-primary">
+                        Open Products
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CREATE -->
+        <div class="col-md-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body text-center">
+
+                    <h5 class="card-title">Create</h5>
+
+                    <p class="card-text">
+                        Add new products to your inventory.
+                    </p>
+
+                    <a th:href="@{/admin/newProduct}"
+                       sec:authorize="hasRole('ADMIN')"
+                       class="btn btn-outline-primary">
+                        Add Product
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ACCOUNT -->
+        <div class="col-md-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body text-center">
+
+                    <h5 class="card-title">Account</h5>
+
+                    <p class="card-text">
+                        Logged in as:
+                        <strong sec:authentication="name"></strong>
+                    </p>
+
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="btn btn-outline-danger">
+                            Logout
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
