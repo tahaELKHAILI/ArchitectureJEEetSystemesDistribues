@@ -1,9 +1,6 @@
 package ma.enset.bankapp.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor @NoArgsConstructor
 @Data
 public class Customer {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String name;
     private String email;
