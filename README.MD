@@ -23,3 +23,9 @@ We are building a real web application with pages, a form, a secure connection a
 We learn the basics of angular and how it can interract with a backend
 
 [Practice 4](./Activité%20Pratique%20N°4%20-%20Angular%20Framework/)
+
+
+## Projet Spring Angular JWT Spring Security
+Bank application to apply all the concepts
+
+[Bank project](./Projet%20Spring%20Angular%20JWT%20Spring%20Security/)
