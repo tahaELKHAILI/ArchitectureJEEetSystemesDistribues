@@ -11,10 +11,10 @@ import java.util.List;
 @AllArgsConstructor @NoArgsConstructor
 @Data
 public class Customer {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private String name;
     private String email;
-    @OneToMany(mappedBy = "bankAccount", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private List<BankAccount> bankAccounts;
 }

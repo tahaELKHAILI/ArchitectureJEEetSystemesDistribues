@@ -23,6 +23,6 @@ public abstract class BankAccount {
     private AccountStatus accountStatus;
     @ManyToOne
     private Customer customer;
-    @OneToMany(mappedBy = "operation", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bankAccount", fetch = FetchType.LAZY)
     private List<Operation> accountOperations;
 }
