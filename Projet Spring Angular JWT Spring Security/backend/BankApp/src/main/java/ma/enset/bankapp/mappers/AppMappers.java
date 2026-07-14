@@ -15,20 +15,20 @@ import org.springframework.stereotype.Service;
 public class AppMappers {
 
     //Customer
-    CustomerDto fromCustomerToDto(Customer customer){
+    public CustomerDto fromCustomerToDto(Customer customer){
         CustomerDto customerDto = new CustomerDto();
         BeanUtils.copyProperties(customer, customerDto);
         return customerDto;
     }
 
-    Customer fromDtoToCustomer(CustomerDto customerDto){
+    public Customer fromDtoToCustomer(CustomerDto customerDto){
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDto, customer);
         return customer;
     }
 
     // Current account
-    CurrentAccountDto fromAccountToDto(CurrentAccount currentAccount){
+    public CurrentAccountDto fromAccountToDto(CurrentAccount currentAccount){
         CurrentAccountDto accountDto = new CurrentAccountDto();
         BeanUtils.copyProperties(currentAccount, accountDto);
         accountDto.setCustomerDto(fromCustomerToDto(currentAccount.getCustomer()));
@@ -36,7 +36,7 @@ public class AppMappers {
         return accountDto;
     }
 
-    CurrentAccount fromDtoToAccount(CurrentAccountDto currentAccountDto){
+    public CurrentAccount fromDtoToAccount(CurrentAccountDto currentAccountDto){
         CurrentAccount account = new CurrentAccount();
         BeanUtils.copyProperties(currentAccountDto, account);
         account.setCustomer(fromDtoToCustomer(currentAccountDto.getCustomerDto()));
@@ -44,7 +44,7 @@ public class AppMappers {
     }
 
     // Saving account
-    SavingAccountDto fromAccountToDto(SavingAccount savingAccount){
+    public SavingAccountDto fromAccountToDto(SavingAccount savingAccount){
         SavingAccountDto accountDto = new SavingAccountDto();
         BeanUtils.copyProperties(savingAccount, accountDto);
         accountDto.setCustomerDto(fromCustomerToDto(savingAccount.getCustomer()));
@@ -52,7 +52,7 @@ public class AppMappers {
         return accountDto;
     }
 
-    SavingAccount fromDtoToAccount(SavingAccountDto savingAccountDto){
+    public SavingAccount fromDtoToAccount(SavingAccountDto savingAccountDto){
         SavingAccount account = new SavingAccount();
         BeanUtils.copyProperties(savingAccountDto, account);
         account.setCustomer(fromDtoToCustomer(savingAccountDto.getCustomerDto()));
@@ -60,7 +60,7 @@ public class AppMappers {
     }
 
     // Operation
-    OperationDto fromDtoToOperation(Operation operation){
+    public OperationDto fromOperationToDto(Operation operation){
         OperationDto operationDto = new OperationDto();
         BeanUtils.copyProperties(operation, operationDto);
         return operationDto;

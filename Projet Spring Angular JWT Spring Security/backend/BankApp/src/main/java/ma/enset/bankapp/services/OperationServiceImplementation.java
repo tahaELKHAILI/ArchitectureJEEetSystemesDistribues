@@ -2,16 +2,19 @@ package ma.enset.bankapp.services;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import ma.enset.bankapp.dtos.OperationDto;
 import ma.enset.bankapp.entities.BankAccount;
 import ma.enset.bankapp.entities.Operation;
 import ma.enset.bankapp.enums.OperationType;
 import ma.enset.bankapp.exceptions.AccountNotFoundException;
 import ma.enset.bankapp.exceptions.InsuficiantBalanceException;
+import ma.enset.bankapp.mappers.AppMappers;
 import ma.enset.bankapp.repositories.BankAccountRepository;
 import ma.enset.bankapp.repositories.OperationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -19,6 +22,7 @@ import java.util.List;
 public class OperationServiceImplementation implements OperationServiceInterface{
     private OperationRepository operationRepository;
     private BankAccountRepository bankAccountRepository;
+    private AppMappers mappers;
 
     @Override
     public void debit(String accountID, long amount, String description) throws AccountNotFoundException, InsuficiantBalanceException {
@@ -64,8 +68,11 @@ public class OperationServiceImplementation implements OperationServiceInterface
     }
 
     @Override
-    public List<Operation> accountHistory(String accountID) {
+    public List<OperationDto> accountHistory(String accountID) {
         List<Operation> operations = operationRepository.findByBankAccountId(accountID);
-        return operations;
+        List<OperationDto> operationsDto = operations.stream().map(operation ->
+            mappers.fromOperationToDto(operation)
+        ).collect(Collectors.toList());
+        return operationsDto;
     }
 }
