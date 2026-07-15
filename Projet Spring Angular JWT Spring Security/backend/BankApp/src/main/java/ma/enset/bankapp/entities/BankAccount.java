@@ -15,7 +15,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(length = 4, name = "TYPE")
 public abstract class BankAccount {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private Date createdAt;
     private double balance;

@@ -9,6 +9,7 @@ import ma.enset.bankapp.entities.BankAccount;
 import ma.enset.bankapp.entities.CurrentAccount;
 import ma.enset.bankapp.entities.Customer;
 import ma.enset.bankapp.entities.SavingAccount;
+import ma.enset.bankapp.enums.AccountStatus;
 import ma.enset.bankapp.exceptions.AccountNotFoundException;
 import ma.enset.bankapp.exceptions.CustomerNotFoundException;
 import ma.enset.bankapp.mappers.AppMappers;
@@ -70,6 +71,7 @@ public class BankAccountServiceImplementation implements BankAccountServiceInter
         currentAccount.setBalance(initialBalance);
         currentAccount.setOverdraft(overdraft);
         currentAccount.setCreatedAt(new Date());
+        currentAccount.setAccountStatus(AccountStatus.CREATED);
         bankAccountRepository.save(currentAccount);
 
         CurrentAccountDto newAccountDto = mappers.fromAccountToDto(currentAccount);
@@ -86,6 +88,7 @@ public class BankAccountServiceImplementation implements BankAccountServiceInter
         savingAccount.setCreatedAt(new Date());
         savingAccount.setBalance(initialBalance);
         savingAccount.setInterestRate(interestRate);
+        savingAccount.setAccountStatus(AccountStatus.CREATED);
         bankAccountRepository.save(savingAccount);
 
         SavingAccountDto newAccountDto = mappers.fromAccountToDto(savingAccount);

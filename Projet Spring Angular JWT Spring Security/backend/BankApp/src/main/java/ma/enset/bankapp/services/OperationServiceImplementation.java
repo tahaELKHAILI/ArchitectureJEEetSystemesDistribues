@@ -13,6 +13,7 @@ import ma.enset.bankapp.repositories.BankAccountRepository;
 import ma.enset.bankapp.repositories.OperationRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,7 @@ public class OperationServiceImplementation implements OperationServiceInterface
         operation.setAmount(amount);
         operation.setDescription(description);
         operation.setBankAccount(bankAccount);
+        operation.setDate(new Date());
         operationRepository.save(operation);
 
         bankAccount.setBalance(bankAccount.getBalance()-amount);
@@ -53,6 +55,7 @@ public class OperationServiceImplementation implements OperationServiceInterface
         operation.setAmount(amount);
         operation.setDescription(description);
         operation.setBankAccount(bankAccount);
+        operation.setDate(new Date());
         operationRepository.save(operation);
 
         bankAccount.setBalance(bankAccount.getBalance()+amount);
