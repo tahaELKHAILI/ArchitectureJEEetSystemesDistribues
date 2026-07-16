@@ -58,8 +58,8 @@ public class BankAppApplication {
                     else{
                         accountID = ((SavingAccountDto)account).getId();
                     }
-                    operationServiceImplementation.debit(accountID, (long) (Math.random()*1000), "Debit");
-                    operationServiceImplementation.credit(accountID, (long)(Math.random()*2000), "Credit");
+                    operationServiceImplementation.debit(accountID,(Math.random()*100), "Debit");
+                    operationServiceImplementation.credit(accountID,(Math.random()*200), "Credit");
                 }
             }
         };

@@ -26,7 +26,7 @@ public class OperationServiceImplementation implements OperationServiceInterface
     private AppMappers mappers;
 
     @Override
-    public void debit(String accountID, long amount, String description) throws AccountNotFoundException, InsuficiantBalanceException {
+    public void debit(String accountID, double amount, String description) throws AccountNotFoundException, InsuficiantBalanceException {
         BankAccount bankAccount = bankAccountRepository.findById(accountID).orElseThrow(()->
                 new AccountNotFoundException("Account not found"));
 
@@ -46,7 +46,7 @@ public class OperationServiceImplementation implements OperationServiceInterface
     }
 
     @Override
-    public void credit(String accountID, long amount, String description) throws AccountNotFoundException {
+    public void credit(String accountID, double amount, String description) throws AccountNotFoundException {
         BankAccount bankAccount = bankAccountRepository.findById(accountID).orElseThrow(()->
                 new AccountNotFoundException("Account not found"));
 
@@ -63,7 +63,7 @@ public class OperationServiceImplementation implements OperationServiceInterface
     }
 
     @Override
-    public void transfer(String sourceAccountID, String destinationAccountID, long amount) throws AccountNotFoundException, InsuficiantBalanceException {
+    public void transfer(String sourceAccountID, String destinationAccountID, double amount) throws AccountNotFoundException, InsuficiantBalanceException {
         //Source account
         debit(sourceAccountID, amount, "Transfer to "+destinationAccountID);
         //Destination account
