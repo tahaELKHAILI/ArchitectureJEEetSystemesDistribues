@@ -9,9 +9,10 @@ import java.util.List;
 
 public interface OperationServiceInterface {
 
-    void debit(String accountID, double amount, String description) throws AccountNotFoundException, InsuficiantBalanceException;
-    void credit(String accountID, double amount, String description)throws AccountNotFoundException;
+    void debit(String transactionID, String accountID, double amount, String description) throws AccountNotFoundException, InsuficiantBalanceException;
+    void credit(String transactionID, String accountID, double amount, String description)throws AccountNotFoundException;
     void transfer(String sourceAccountID, String destinationAccountID, double amount)throws AccountNotFoundException, InsuficiantBalanceException;
+    void cancelTransfer(String transactionID) throws AccountNotFoundException, InsuficiantBalanceException;
     List<OperationDto> accountHistory(String accountID);
 
 }

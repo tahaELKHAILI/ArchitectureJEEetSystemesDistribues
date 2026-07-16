@@ -1,5 +1,6 @@
 package ma.enset.bankapp;
 
+import jakarta.transaction.Transactional;
 import ma.enset.bankapp.dtos.BankAccountDto;
 import ma.enset.bankapp.dtos.CurrentAccountDto;
 import ma.enset.bankapp.dtos.CustomerDto;
@@ -14,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 
@@ -58,8 +60,9 @@ public class BankAppApplication {
                     else{
                         accountID = ((SavingAccountDto)account).getId();
                     }
-                    operationServiceImplementation.debit(accountID,(Math.random()*100), "Debit");
-                    operationServiceImplementation.credit(accountID,(Math.random()*200), "Credit");
+                    String transactionID = UUID.randomUUID().toString();
+                    operationServiceImplementation.credit(transactionID, accountID,(Math.random()*200), "Credit");
+                    operationServiceImplementation.debit(transactionID, accountID,(Math.random()*10), "Debit");
                 }
             }
         };

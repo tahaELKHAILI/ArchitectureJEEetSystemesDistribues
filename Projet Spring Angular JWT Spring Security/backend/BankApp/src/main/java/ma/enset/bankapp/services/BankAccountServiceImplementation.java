@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import ma.enset.bankapp.dtos.BankAccountDto;
 import ma.enset.bankapp.dtos.CurrentAccountDto;
 import ma.enset.bankapp.dtos.SavingAccountDto;
+import ma.enset.bankapp.dtos.UpdateAccountRequestDto;
 import ma.enset.bankapp.entities.BankAccount;
 import ma.enset.bankapp.entities.CurrentAccount;
 import ma.enset.bankapp.entities.Customer;
@@ -79,6 +80,18 @@ public class BankAccountServiceImplementation implements BankAccountServiceInter
     }
 
     @Override
+    public CurrentAccountDto updateCurrentAccount(UpdateAccountRequestDto updateAccountRequestDto, String accountID) throws AccountNotFoundException {
+        CurrentAccount bankAccount = (CurrentAccount) bankAccountRepository.findById(accountID).orElseThrow(()->
+                new AccountNotFoundException("Account not found"));
+        bankAccount.setBalance(updateAccountRequestDto.getBalance());
+        bankAccount.setOverdraft(updateAccountRequestDto.getOverdraft());
+        bankAccount.setAccountStatus(updateAccountRequestDto.getAccountStatus());
+        bankAccountRepository.save(bankAccount);
+        CurrentAccountDto updatedAccount = mappers.fromAccountToDto(bankAccount);
+        return updatedAccount;
+    }
+
+    @Override
     public SavingAccountDto createSavingAccount(double initialBalance, double interestRate, String customerID) throws CustomerNotFoundException {
         Customer customer = customerRepository.findById(customerID).orElseThrow(()->
                 new CustomerNotFoundException("Customer not found"));
@@ -93,5 +106,22 @@ public class BankAccountServiceImplementation implements BankAccountServiceInter
 
         SavingAccountDto newAccountDto = mappers.fromAccountToDto(savingAccount);
         return newAccountDto;
+    }
+
+    @Override
+    public SavingAccountDto updateSavingAccount(UpdateAccountRequestDto updateAccountRequestDto, String accountID) throws AccountNotFoundException {
+        SavingAccount bankAccount = (SavingAccount) bankAccountRepository.findById(accountID).orElseThrow(()->
+                new AccountNotFoundException("Account not found"));
+        bankAccount.setBalance(updateAccountRequestDto.getBalance());
+        bankAccount.setInterestRate(updateAccountRequestDto.getInterestRate());
+        bankAccount.setAccountStatus(updateAccountRequestDto.getAccountStatus());
+        bankAccountRepository.save(bankAccount);
+        SavingAccountDto updatedAccount = mappers.fromAccountToDto(bankAccount);
+        return updatedAccount;
+    }
+
+    @Override
+    public void deleteAccount(String accountID) {
+        bankAccountRepository.deleteById(accountID);
     }
 }

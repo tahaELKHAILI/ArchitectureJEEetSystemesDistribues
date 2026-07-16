@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +27,7 @@ public class OperationServiceImplementation implements OperationServiceInterface
     private AppMappers mappers;
 
     @Override
-    public void debit(String accountID, double amount, String description) throws AccountNotFoundException, InsuficiantBalanceException {
+    public void debit(String transactionID,String accountID, double amount, String description) throws AccountNotFoundException, InsuficiantBalanceException {
         BankAccount bankAccount = bankAccountRepository.findById(accountID).orElseThrow(()->
                 new AccountNotFoundException("Account not found"));
 
@@ -34,6 +35,7 @@ public class OperationServiceImplementation implements OperationServiceInterface
             throw new InsuficiantBalanceException("Insuficiant funds");
 
         Operation operation = new Operation();
+        operation.setTransactionID(transactionID);
         operation.setOperationType(OperationType.DEBIT);
         operation.setAmount(amount);
         operation.setDescription(description);
@@ -46,11 +48,12 @@ public class OperationServiceImplementation implements OperationServiceInterface
     }
 
     @Override
-    public void credit(String accountID, double amount, String description) throws AccountNotFoundException {
+    public void credit(String transactionID, String accountID, double amount, String description) throws AccountNotFoundException {
         BankAccount bankAccount = bankAccountRepository.findById(accountID).orElseThrow(()->
                 new AccountNotFoundException("Account not found"));
 
         Operation operation = new Operation();
+        operation.setTransactionID(transactionID);
         operation.setOperationType(OperationType.CREDIT);
         operation.setAmount(amount);
         operation.setDescription(description);
@@ -64,10 +67,43 @@ public class OperationServiceImplementation implements OperationServiceInterface
 
     @Override
     public void transfer(String sourceAccountID, String destinationAccountID, double amount) throws AccountNotFoundException, InsuficiantBalanceException {
+        String transactionID = UUID.randomUUID().toString();
         //Source account
-        debit(sourceAccountID, amount, "Transfer to "+destinationAccountID);
+        debit(transactionID, sourceAccountID, amount, "Transfer to "+destinationAccountID);
         //Destination account
-        credit(destinationAccountID, amount, "Transfer from "+sourceAccountID);
+        credit(transactionID, destinationAccountID, amount, "Transfer from "+sourceAccountID);
+    }
+
+    @Override
+    public void cancelTransfer(String transactionID) throws AccountNotFoundException, InsuficiantBalanceException {
+
+        List<Operation> operations = operationRepository.findByTransactionID(transactionID);
+
+        Operation debitOperation = operations.stream()
+                .filter(op -> op.getOperationType() == OperationType.DEBIT)
+                .findFirst()
+                .orElse(null);
+
+        Operation creditOperation = operations.stream()
+                .filter(op -> op.getOperationType() == OperationType.CREDIT)
+                .findFirst()
+                .orElse(null);
+
+        String reverseTransactionID = UUID.randomUUID().toString();
+
+        debit(
+                reverseTransactionID,
+                creditOperation.getBankAccount().getId(),
+                creditOperation.getAmount(),
+                "Transfer cancellation"
+        );
+
+        credit(
+                reverseTransactionID,
+                debitOperation.getBankAccount().getId(),
+                debitOperation.getAmount(),
+                "Transfer cancellation"
+        );
     }
 
     @Override

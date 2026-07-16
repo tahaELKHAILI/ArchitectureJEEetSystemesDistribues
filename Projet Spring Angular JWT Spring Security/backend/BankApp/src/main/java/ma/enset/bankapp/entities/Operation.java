@@ -20,5 +20,6 @@ public class Operation {
     private OperationType operationType;
     @ManyToOne
     private BankAccount bankAccount;
+    private String transactionID;
     private String description;
 }

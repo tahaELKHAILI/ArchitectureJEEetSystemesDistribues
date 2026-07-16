@@ -39,7 +39,7 @@ public class CustomerRestController {
         return customerServiceImplementation.saveCustomer(customer);
     }
 
-    @PostMapping("/customers/{customerID}")
+    @PutMapping("/customers/{customerID}")
     public CustomerDto updateCustomer(@PathVariable String customerID , @RequestBody CustomerDto customer){
         return customerServiceImplementation.updateCustomer(customer);
     }
