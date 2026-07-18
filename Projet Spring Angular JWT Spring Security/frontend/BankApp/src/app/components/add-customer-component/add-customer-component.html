@@ -1,0 +1,22 @@
+<div class ="container mt-3">
+  <div class = "card mt-3">
+    <div class = "card-header">New customer</div>
+    <div class="card-body">
+      <form [formGroup]="newCustomerFormGroup" , (ngSubmit)="handleAddCustomer()" >
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input class="form-control" formControlName="name">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input class="form-control" formControlName="email">
+        </div>
+        <button class="btn btn-success">
+          <i class ="bi bi-save2"></i>
+          Save
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

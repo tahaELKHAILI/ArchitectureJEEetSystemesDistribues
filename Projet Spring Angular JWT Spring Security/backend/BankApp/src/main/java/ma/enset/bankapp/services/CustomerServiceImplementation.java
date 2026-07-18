@@ -56,7 +56,7 @@ public class CustomerServiceImplementation implements CustomerServiceInterface {
 
     @Override
     public List<CustomerDto> searchCustomers(String keyword) {
-        List<Customer> customers = customerRepository.searchCustomer(keyword);
+        List<Customer> customers = customerRepository.searchCustomer("%"+keyword+"%");
         List<CustomerDto> customersDto = customers.stream().map(customer ->
                 mappers.fromCustomerToDto(customer)).collect(Collectors.toList());
         return customersDto;
