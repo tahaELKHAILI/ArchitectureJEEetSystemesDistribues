@@ -1,13 +1,7 @@
 package ma.enset.bankapp.mappers;
 
-import ma.enset.bankapp.dtos.CurrentAccountDto;
-import ma.enset.bankapp.dtos.CustomerDto;
-import ma.enset.bankapp.dtos.OperationDto;
-import ma.enset.bankapp.dtos.SavingAccountDto;
-import ma.enset.bankapp.entities.CurrentAccount;
-import ma.enset.bankapp.entities.Customer;
-import ma.enset.bankapp.entities.Operation;
-import ma.enset.bankapp.entities.SavingAccount;
+import ma.enset.bankapp.dtos.*;
+import ma.enset.bankapp.entities.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +19,17 @@ public class AppMappers {
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDto, customer);
         return customer;
+    }
+
+    //Bank accounts
+
+    public BankAccountDto fromBankAccountToDto(BankAccount bankAccount) {
+        if (bankAccount instanceof CurrentAccount) {
+            return fromAccountToDto((CurrentAccount) bankAccount);
+        } else if (bankAccount instanceof SavingAccount) {
+            return fromAccountToDto((SavingAccount) bankAccount);
+        }
+        return null;
     }
 
     // Current account

@@ -1,6 +1,7 @@
 package ma.enset.bankapp.web;
 
 import lombok.AllArgsConstructor;
+import ma.enset.bankapp.dtos.AccountHistoryDto;
 import ma.enset.bankapp.dtos.OperationDto;
 import ma.enset.bankapp.dtos.TransactionDto;
 import ma.enset.bankapp.dtos.TransferRequestDto;
@@ -54,5 +55,12 @@ public class OperationRestController {
     @GetMapping("accounts/transactions/{accountID}")
     public List<OperationDto> accountTransactions(@PathVariable(name = "accountID") String accountID){
         return operationServiceImplementation.accountHistory(accountID);
+    }
+
+    @GetMapping("accounts/transactions/{accountID}/page")
+    public AccountHistoryDto getAccountHistory(@PathVariable(name = "accountID") String accountID,
+                                                     @RequestParam(name = "page", defaultValue = "0") int page,
+                                                     @RequestParam(name = "size", defaultValue = "5") int size) throws AccountNotFoundException {
+        return operationServiceImplementation.getAccountHistory(accountID, page, size);
     }
 }

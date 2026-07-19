@@ -1,5 +1,6 @@
 package ma.enset.bankapp.services;
 
+import ma.enset.bankapp.dtos.AccountHistoryDto;
 import ma.enset.bankapp.dtos.OperationDto;
 import ma.enset.bankapp.entities.Operation;
 import ma.enset.bankapp.exceptions.AccountNotFoundException;
@@ -14,5 +15,5 @@ public interface OperationServiceInterface {
     void transfer(String sourceAccountID, String destinationAccountID, double amount)throws AccountNotFoundException, InsuficiantBalanceException;
     void cancelTransfer(String transactionID) throws AccountNotFoundException, InsuficiantBalanceException;
     List<OperationDto> accountHistory(String accountID);
-
+    AccountHistoryDto getAccountHistory(String accountID, int page, int size) throws AccountNotFoundException;
 }

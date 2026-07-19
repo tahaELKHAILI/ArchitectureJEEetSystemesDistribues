@@ -28,6 +28,11 @@ public class BankAccountRestController {
         return bankAccountServiceImplementation.getBankAccount(accountID);
     }
 
+    @GetMapping("/accounts/customer/{customerID}")
+    public List<BankAccountDto> getUsersAccount(@PathVariable(name = "customerID") String customerID){
+        return bankAccountServiceImplementation.getBankAccountByCustomerID(customerID);
+    }
+
     @PostMapping("/accounts/current")
     public CurrentAccountDto createCurrentAccount(@RequestBody double inintialBalance, double overdraft, String customerID) throws CustomerNotFoundException {
         return bankAccountServiceImplementation.createCurrentAccount(inintialBalance, overdraft, customerID);

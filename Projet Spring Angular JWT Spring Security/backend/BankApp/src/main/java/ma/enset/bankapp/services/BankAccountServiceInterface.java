@@ -15,7 +15,7 @@ public interface BankAccountServiceInterface {
     List<BankAccountDto> getAllBankAccounts();
     BankAccountDto getBankAccount(String accountID) throws AccountNotFoundException;
     void deleteAccount(String accountID);
-
+    List<BankAccountDto> getBankAccountByCustomerID(String customerID);
 
     //Current account methods
     CurrentAccountDto createCurrentAccount(double initialBalance, double overdraft, String customerID) throws CustomerNotFoundException;

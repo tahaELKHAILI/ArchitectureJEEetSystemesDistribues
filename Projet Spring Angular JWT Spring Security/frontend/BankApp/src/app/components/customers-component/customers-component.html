@@ -9,13 +9,13 @@
   } @else {
     @if(customers | async; as customersList){
       <div class ="card">
-        <div class = "card-header">Customers</div>
+        <div class = "card-header text-center fw-bold fs-2">Customers</div>
         <div class="card-body">
           @if(searchFormGroup){
             <form [formGroup]="searchFormGroup" (ngSubmit)="handleCustomerSearch()">
               <div class ="input-group">
                 <label class = "input-group-text">Keyword</label>
-                <input class="form-control" formControlName="keyword" type = "text">
+                <input class="form-control" formControlName="keyword" type = "text" placeholder="Enter search keyword">
                 <button class = "btn btn-info">
                   <i class ="bi bi-search"></i>
                 </button>
@@ -37,7 +37,7 @@
                   <td>{{customer.name}}</td>
                   <td>{{customer.email}}</td>
                   <td>
-                    <button class="btn btn btn-success">Accounts</button>
+                    <button class="btn btn btn-success" (click)="handleCustomerAccounts(customer)">Accounts</button>
                   </td>
                   <td>
                     <button class = "btn btn btn-info">

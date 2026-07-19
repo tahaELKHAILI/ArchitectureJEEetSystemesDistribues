@@ -1,18 +1,24 @@
-<div class ="container mt-3">
+<div class ="container mt-3 w-50">
   <div class = "card mt-3">
-    <div class = "card-header">New customer</div>
+    <div class = "card-header text-center fw-bold fs-2">New customer</div>
     <div class="card-body">
-      <form [formGroup]="newCustomerFormGroup" , (ngSubmit)="handleAddCustomer()" >
+      <form [formGroup]="newCustomerFormGroup" (ngSubmit)="handleAddCustomer()" >
         <div class="mb-3">
           <label class="form-label">Name</label>
           <input class="form-control" formControlName="name">
+          @if(newCustomerFormGroup.controls['name'].errors){
+            <span class="text-danger">Make sure to insert a name</span>
+          }
         </div>
 
         <div class="mb-3">
           <label class="form-label">Email</label>
-          <input class="form-control" formControlName="email">
+          <input class="form-control" formControlName="email" type ="email" >
+          @if(newCustomerFormGroup.controls['email'].errors){
+            <span class="text-danger">Make sure to insert a valid email address</span>
+          }
         </div>
-        <button class="btn btn-success">
+        <button [disabled]="!newCustomerFormGroup.valid" class="btn btn-success">
           <i class ="bi bi-save2"></i>
           Save
         </button>

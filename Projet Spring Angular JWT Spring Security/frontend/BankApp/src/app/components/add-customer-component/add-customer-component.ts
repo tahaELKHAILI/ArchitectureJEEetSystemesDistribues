@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CustomerModel } from '../../models/customer-model';
 import { CustomerService } from '../../services/customer-service';
 import { Router } from '@angular/router';
@@ -20,8 +20,8 @@ export class AddCustomerComponent implements OnInit {
 
   ngOnInit() {
     this.newCustomerFormGroup = this.formBuilder.group({
-      name: this.formBuilder.control(null),
-      email: this.formBuilder.control(null),
+      name: this.formBuilder.control(null, [Validators.required]),
+      email: this.formBuilder.control(null, [Validators.required, Validators.email]),
     });
   }
 

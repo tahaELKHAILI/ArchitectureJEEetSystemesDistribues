@@ -61,6 +61,14 @@ public class BankAccountServiceImplementation implements BankAccountServiceInter
         }
     }
 
+    @Override
+    public List<BankAccountDto> getBankAccountByCustomerID(String customerId) {
+        List<BankAccount> bankAccounts = bankAccountRepository.getBankAccountsByCustomer_Id(customerId);
+
+        return bankAccounts.stream()
+                .map(account -> mappers.fromBankAccountToDto(account))
+                .collect(Collectors.toList());
+    }
 
     @Override
     public CurrentAccountDto createCurrentAccount(double initialBalance, double overdraft, String customerID) throws CustomerNotFoundException {
@@ -69,6 +77,7 @@ public class BankAccountServiceImplementation implements BankAccountServiceInter
 
         CurrentAccount currentAccount = new CurrentAccount();
         currentAccount.setCustomer(customer);
+        currentAccount.setBalance(initialBalance);
         currentAccount.setBalance(initialBalance);
         currentAccount.setOverdraft(overdraft);
         currentAccount.setCreatedAt(new Date());

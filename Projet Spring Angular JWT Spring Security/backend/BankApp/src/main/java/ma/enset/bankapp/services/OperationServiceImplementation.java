@@ -2,6 +2,7 @@ package ma.enset.bankapp.services;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import ma.enset.bankapp.dtos.AccountHistoryDto;
 import ma.enset.bankapp.dtos.OperationDto;
 import ma.enset.bankapp.entities.BankAccount;
 import ma.enset.bankapp.entities.Operation;
@@ -11,6 +12,8 @@ import ma.enset.bankapp.exceptions.InsuficiantBalanceException;
 import ma.enset.bankapp.mappers.AppMappers;
 import ma.enset.bankapp.repositories.BankAccountRepository;
 import ma.enset.bankapp.repositories.OperationRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -113,5 +116,27 @@ public class OperationServiceImplementation implements OperationServiceInterface
             mappers.fromOperationToDto(operation)
         ).collect(Collectors.toList());
         return operationsDto;
+    }
+
+    @Override
+    public AccountHistoryDto getAccountHistory(String accountID, int page, int size) throws AccountNotFoundException {
+        BankAccount bankAccount = bankAccountRepository.findById(accountID).orElse(null);
+        if(bankAccount == null)
+            throw new AccountNotFoundException("Bank account not found");
+        Page<Operation> operations = operationRepository.findByBankAccountIdOrderByDateDesc(
+                bankAccount.getId(), PageRequest.of(page, size));
+        AccountHistoryDto accountHistoryDto = new AccountHistoryDto();
+
+        List<OperationDto> accountOperations = operations.getContent().stream().map(operation ->
+                mappers.fromOperationToDto(operation)).collect(Collectors.toList());
+
+        accountHistoryDto.setAccountId(accountID);
+        accountHistoryDto.setBalance(bankAccount.getBalance());
+        accountHistoryDto.setPageSize(size);
+        accountHistoryDto.setCurrentPage(page);
+        accountHistoryDto.setTotalPages(operations.getTotalPages());
+        accountHistoryDto.setOperationsDTOS(accountOperations);
+
+        return accountHistoryDto;
     }
 }

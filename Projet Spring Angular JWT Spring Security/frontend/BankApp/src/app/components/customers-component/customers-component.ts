@@ -4,6 +4,7 @@ import { CustomerModel } from '../../models/customer-model';
 import { CustomerService } from '../../services/customer-service';
 import { AsyncPipe } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customers-component',
@@ -20,6 +21,7 @@ export class CustomersComponent implements OnInit {
     private customerService: CustomerService,
     private formBuilder: FormBuilder,
     private changeDetection: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -51,7 +53,14 @@ export class CustomersComponent implements OnInit {
         this.customers = this.customerService.getCusomters();
         this.changeDetection.detectChanges();
       },
-      error: (err) => console.error(err),
+      error: (err) => {
+        console.error(err);
+        alert(`Can't delete customer as they have associated bank accounts`);
+      },
     });
+  }
+
+  handleCustomerAccounts(customer: CustomerModel) {
+    this.router.navigateByUrl('/accounts/' + customer.id, { state: customer });
   }
 }
