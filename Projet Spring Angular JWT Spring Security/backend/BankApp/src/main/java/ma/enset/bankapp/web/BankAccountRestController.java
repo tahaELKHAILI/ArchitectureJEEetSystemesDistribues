@@ -45,7 +45,7 @@ public class BankAccountRestController {
 
     @PostMapping("/accounts/saving")
     public SavingAccountDto createSavingAccount(@RequestBody CreateSavingAccountDto createSavingAccountDto) throws CustomerNotFoundException {
-        return bankAccountServiceImplementation.createSavingAccount(createSavingAccountDto.getInintialBalance(),
+        return bankAccountServiceImplementation.createSavingAccount(createSavingAccountDto.getInitialBalance(),
                 createSavingAccountDto.getInterestRate(),
                 createSavingAccountDto.getCustomerID());
     }

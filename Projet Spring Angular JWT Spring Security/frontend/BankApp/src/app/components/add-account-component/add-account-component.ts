@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AccountService } from '../../services/account-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CurrentAccountCreation } from '../../models/current-account-creation';
+import { SavingAccountCreation } from '../../models/saving-account-creation';
 
 @Component({
   selector: 'app-add-account-component',
@@ -47,15 +48,42 @@ export class AddAccountComponent implements OnInit {
     }
   }
 
-  handleAddAccount() {
+  handleAddAccount(){
+    let type = this.newAccountFormGroup.value['accountType'];
+    if(type =="Saving"){
+      this.createSavingAccount()
+    }
+    else{
+      this.createCurrentAccount()
+    }
+  }
+
+  createCurrentAccount() {
     let currentAccount: CurrentAccountCreation = this.newAccountFormGroup.value;
-    currentAccount.customerID = this.route.snapshot.params["id"];
-    console.log(currentAccount)
+    currentAccount.customerID = this.route.snapshot.params['id'];
+    console.log(currentAccount);
     this.accountService.addCurrentAccount(currentAccount).subscribe({
       next: (resp) => {
         alert(`Account was added successfully`);
         this.newAccountFormGroup.reset();
-        this.router.navigateByUrl('/accounts/'+currentAccount.customerID);
+        this.router.navigateByUrl('/accounts/' + currentAccount.customerID);
+      },
+      error: (err) => {
+        console.error(err);
+        alert(err['message']);
+      },
+    });
+  }
+
+  createSavingAccount() {
+    let savingAccount: SavingAccountCreation = this.newAccountFormGroup.value;
+    savingAccount.customerID = this.route.snapshot.params['id'];
+    console.log(savingAccount);
+    this.accountService.addSavingAccount(savingAccount).subscribe({
+      next: (resp) => {
+        alert(`Account was added successfully`);
+        this.newAccountFormGroup.reset();
+        this.router.navigateByUrl('/accounts/' + savingAccount.customerID);
       },
       error: (err) => {
         console.error(err);

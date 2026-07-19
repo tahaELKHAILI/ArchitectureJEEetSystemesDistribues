@@ -1,7 +1,7 @@
 import { AccountModel } from './account-model';
 
-export interface CurrentAccountCreation {
+export interface SavingAccountCreation{
   initialBalance: number;
-  overdraft: number;
+  interestRate: number;
   customerID: string;
 }

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class CreateSavingAccountDto {
-    private double inintialBalance;
+    private double initialBalance;
     private double interestRate;
     private String customerID;
 }

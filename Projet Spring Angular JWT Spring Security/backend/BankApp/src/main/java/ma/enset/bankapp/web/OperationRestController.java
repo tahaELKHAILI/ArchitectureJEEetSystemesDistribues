@@ -57,7 +57,7 @@ public class OperationRestController {
         return operationServiceImplementation.accountHistory(accountID);
     }
 
-    @GetMapping("accounts/transactions/{accountID}/page")
+    @GetMapping("accounts/transactions/{accountID}/")
     public AccountHistoryDto getAccountHistory(@PathVariable(name = "accountID") String accountID,
                                                      @RequestParam(name = "page", defaultValue = "0") int page,
                                                      @RequestParam(name = "size", defaultValue = "5") int size) throws AccountNotFoundException {

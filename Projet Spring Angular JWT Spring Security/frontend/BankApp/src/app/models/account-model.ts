@@ -4,4 +4,6 @@ export interface AccountModel {
   type: string;
   accountStatus: string;
   customerID: string;
+  interestRate:number;
+  overdraft:number;
 }
