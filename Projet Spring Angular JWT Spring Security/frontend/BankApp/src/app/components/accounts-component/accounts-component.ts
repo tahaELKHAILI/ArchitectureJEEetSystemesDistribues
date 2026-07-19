@@ -5,6 +5,7 @@ import { catchError, Observable, of, startWith } from 'rxjs';
 import { AccountModel } from '../../models/account-model';
 import { AccountService } from '../../services/account-service';
 import { AsyncPipe, DecimalPipe } from '@angular/common';
+import { CustomerService } from '../../services/customer-service';
 
 @Component({
   selector: 'app-accounts-component',
@@ -16,20 +17,50 @@ export class AccountsComponent implements OnInit {
   customerId!: string;
   customer!: CustomerModel;
   accounts!: Observable<Array<AccountModel>>;
+  customerBalance = 0;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private accountService: AccountService,
+    private customerService: CustomerService,
   ) {
-    this.customer = this.router.getCurrentNavigation()?.extras.state as CustomerModel;
   }
 
   ngOnInit() {
     this.customerId = this.route.snapshot.params['id'];
+    this.customerService.getCustomer(this.customerId).subscribe({
+      next: (customer) => {
+        this.customer = customer;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+    this.loadAccounts();
+    this.calculateCustomerBalance();
+  }
+
+  loadAccounts() {
     this.accounts = this.accountService.getAccountsByCustomer(this.customerId).pipe(
       startWith([]),
-      catchError(err => of([]))
+      catchError((err) => of([])),
     );
+  }
+
+  calculateCustomerBalance() {
+    this.accounts.subscribe((accounts) => {
+      accounts.forEach((account) => {
+        this.customerBalance += account.balance;
+      });
+    });
+  }
+
+  handleAddAccounts(accountID: string) {
+    this.router.navigateByUrl('/accounts/' + accountID + '/new-account');
+  }
+
+  handleOperations(accountID: string) {
+    this.router.navigateByUrl('/operations/' + accountID);
   }
 }

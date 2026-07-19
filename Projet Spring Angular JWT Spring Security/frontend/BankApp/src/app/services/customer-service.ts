@@ -14,6 +14,10 @@ export class CustomerService {
     return this.http.get<Array<CustomerModel>>(environment.backendHost + '/customers');
   }
 
+  public getCustomer(customerID: string):Observable<CustomerModel>{
+    return this.http.get<CustomerModel>(environment.backendHost+"/customers/"+customerID);
+  }
+
   public searchCustomers(keyword: string): Observable<Array<CustomerModel>> {
     return this.http.get<Array<CustomerModel>>(
       environment.backendHost + '/customers/search?keyword=' + keyword,

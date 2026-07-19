@@ -1,0 +1,37 @@
+<div class ="container mt-3 w-50">
+  <div class = "card">
+    <div class="card-header text-center fw-bold fs-2">Add new account</div>
+    <div class = "card-body">
+      <form [formGroup]="newAccountFormGroup" (ngSubmit)="handleAddAccount()" >
+        <div class="mb-3">
+          <label class="form-label">Account balance</label>
+          <input class="form-control" formControlName="initialBalance">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Account type</label>
+          <select class="form-select" formControlName="accountType">
+            <option value="Saving">Saving account</option>
+            <option value="Current">Current account</option>
+          </select>
+        </div>
+        @if(accountType == "Saving"){
+          <div class="mb-3">
+            <label class="form-label">Interest rate</label>
+            <input class="form-control" formControlName="rate">
+          </div>
+        } @else {
+          <div class="mb-3">
+            <label class="form-label">Overdraft</label>
+            <input class="form-control" formControlName="overdraft">
+          </div>
+
+        }
+        <button class="btn btn-success">
+          <i class ="bi bi-plus"></i>
+          Save
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

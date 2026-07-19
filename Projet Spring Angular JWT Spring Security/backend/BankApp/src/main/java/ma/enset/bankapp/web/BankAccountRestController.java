@@ -1,10 +1,7 @@
 package ma.enset.bankapp.web;
 
 import lombok.AllArgsConstructor;
-import ma.enset.bankapp.dtos.BankAccountDto;
-import ma.enset.bankapp.dtos.CurrentAccountDto;
-import ma.enset.bankapp.dtos.SavingAccountDto;
-import ma.enset.bankapp.dtos.UpdateAccountRequestDto;
+import ma.enset.bankapp.dtos.*;
 import ma.enset.bankapp.exceptions.AccountNotFoundException;
 import ma.enset.bankapp.exceptions.CustomerNotFoundException;
 import ma.enset.bankapp.services.BankAccountServiceImplementation;
@@ -34,8 +31,10 @@ public class BankAccountRestController {
     }
 
     @PostMapping("/accounts/current")
-    public CurrentAccountDto createCurrentAccount(@RequestBody double inintialBalance, double overdraft, String customerID) throws CustomerNotFoundException {
-        return bankAccountServiceImplementation.createCurrentAccount(inintialBalance, overdraft, customerID);
+    public CurrentAccountDto createCurrentAccount(@RequestBody CreateCurrentAccountDto currentAccountDto) throws CustomerNotFoundException {
+        return bankAccountServiceImplementation.createCurrentAccount(currentAccountDto.getInitialBalance(),
+                currentAccountDto.getOverdraft(),
+                currentAccountDto.getCustomerID());
     }
 
     @PutMapping("/accounts/current/{accountID}")
@@ -45,8 +44,10 @@ public class BankAccountRestController {
     }
 
     @PostMapping("/accounts/saving")
-    public SavingAccountDto createSavingAccount(@RequestBody double inintialBalance, double interestRate, String customerID) throws CustomerNotFoundException {
-        return bankAccountServiceImplementation.createSavingAccount(inintialBalance, interestRate, customerID);
+    public SavingAccountDto createSavingAccount(@RequestBody CreateSavingAccountDto createSavingAccountDto) throws CustomerNotFoundException {
+        return bankAccountServiceImplementation.createSavingAccount(createSavingAccountDto.getInintialBalance(),
+                createSavingAccountDto.getInterestRate(),
+                createSavingAccountDto.getCustomerID());
     }
 
     @PutMapping("/accounts/saving/{accountID}")

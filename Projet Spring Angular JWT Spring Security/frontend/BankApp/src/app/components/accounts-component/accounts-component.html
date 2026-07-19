@@ -1,11 +1,12 @@
 <div class ="container mt-3">
   <div class = "card">
     <div class = "card-header">
-      <span><strong>Customer: </strong>{{customer.name}}</span>
+      <span><strong>Customer: </strong>{{customer?.name}}</span>
       <br>
       <span><strong>Customer ID: </strong>{{customerId}}</span>
     </div>
     <div class="card-body">
+      <button class = "btn btn-primary" (click)="handleAddAccounts(customerId)">Add account</button>
       @if(accounts | async; as accountList){
         @if(accountList.length == 0){
             <div class="fs-3">{{customer.name}} has no bank accounts. Create a new account.</div>
@@ -24,8 +25,15 @@
                   <td>{{account.id}}</td>
                   <td>{{account.type}}</td>
                   <td>{{account.balance | number:'1.2-2'}}</td>
+                  <td>
+                    <button class ="btn btn-info" (click)="handleOperations(account.id)">Operations</button>
+                  </td>
                 </tr>
               }
+            <tr>
+              <td colspan="2"><strong>Customer balance: </strong></td>
+              <td><strong>{{customerBalance | number:'1.2-2'}}</strong></td>
+            </tr>
             </tbody>
           </table>
         }
