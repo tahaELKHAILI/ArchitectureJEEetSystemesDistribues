@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerModel } from '../../models/customer-model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of, startWith } from 'rxjs';
 import { AccountModel } from '../../models/account-model';
 import { AccountService } from '../../services/account-service';
 import { AsyncPipe, DecimalPipe } from '@angular/common';
@@ -27,6 +27,9 @@ export class AccountsComponent implements OnInit {
 
   ngOnInit() {
     this.customerId = this.route.snapshot.params['id'];
-    this.accounts = this.accountService.getAccountsByCustomer(this.customerId);
+    this.accounts = this.accountService.getAccountsByCustomer(this.customerId).pipe(
+      startWith([]),
+      catchError(err => of([]))
+    );
   }
 }

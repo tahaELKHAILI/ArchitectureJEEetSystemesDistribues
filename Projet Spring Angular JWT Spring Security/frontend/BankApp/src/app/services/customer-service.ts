@@ -27,4 +27,10 @@ export class CustomerService {
   public addCustomer(customer: CustomerModel){
     return this.http.post<CustomerModel>(environment.backendHost+"/customers", customer)
   }
+
+  public updateCustomer(customer: CustomerModel){
+    return this.http.put<CustomerModel>(
+      environment.backendHost + '/customers/' + customer.id, customer,
+    );
+  }
 }

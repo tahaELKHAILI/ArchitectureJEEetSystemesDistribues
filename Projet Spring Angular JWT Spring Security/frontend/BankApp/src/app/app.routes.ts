@@ -3,10 +3,12 @@ import { CustomersComponent } from './components/customers-component/customers-c
 import { AddCustomerComponent } from './components/add-customer-component/add-customer-component';
 import { AccountsComponent } from './components/accounts-component/accounts-component';
 import { Operations } from './components/operations/operations';
+import { UpdateCustomerComponent } from './components/update-customer-component/update-customer-component';
 
 export const routes: Routes = [
   { component: CustomersComponent, path: 'customers' },
   { component: AddCustomerComponent, path: 'new-customer' },
-  { component: AccountsComponent, path: 'accounts/:id'},
-  { component: Operations, path: 'operations'}
+  { component: UpdateCustomerComponent, path: 'customers/:id' },
+  { component: AccountsComponent, path: 'accounts/:id' },
+  { component: Operations, path: 'operations' },
 ];

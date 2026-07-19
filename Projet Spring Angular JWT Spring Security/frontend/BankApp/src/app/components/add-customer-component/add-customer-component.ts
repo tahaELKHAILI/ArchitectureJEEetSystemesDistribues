@@ -36,6 +36,7 @@ export class AddCustomerComponent implements OnInit {
       },
       error: err => {
         console.error(err)
+        alert(err["message"])
       }
     })
   }

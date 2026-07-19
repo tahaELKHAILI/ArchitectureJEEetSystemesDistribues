@@ -6,24 +6,30 @@
       <span><strong>Customer ID: </strong>{{customerId}}</span>
     </div>
     <div class="card-body">
-      <table class = "table table-hover">
-        <thead>
-          <tr>
-            <th>Account ID</th>
-            <th>Account type</th>
-            <th>Account balance</th>
-          </tr>
-        </thead>
-          <tbody>
-            @for(account of accounts | async; track account.id){
-              <tr>
-                <td>{{account.id}}</td>
-                <td>{{account.type}}</td>
-                <td>{{account.balance | number:'1.2-2'}}</td>
-              </tr>
-            }
-          </tbody>
-      </table>
+      @if(accounts | async; as accountList){
+        @if(accountList.length == 0){
+            <div class="fs-3">{{customer.name}} has no bank accounts. Create a new account.</div>
+        } @else {
+          <table class = "table table-hover">
+            <thead>
+            <tr>
+              <th>Account ID</th>
+              <th>Account type</th>
+              <th>Account balance</th>
+            </tr>
+            </thead>
+            <tbody>
+              @for(account of accountList; track account.id){
+                <tr>
+                  <td>{{account.id}}</td>
+                  <td>{{account.type}}</td>
+                  <td>{{account.balance | number:'1.2-2'}}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        }
+      }
     </div>
   </div>
 </div>
