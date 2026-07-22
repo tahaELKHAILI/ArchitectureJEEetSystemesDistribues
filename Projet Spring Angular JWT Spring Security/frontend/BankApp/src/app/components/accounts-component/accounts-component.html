@@ -7,9 +7,10 @@
     </div>
     <div class="card-body">
       <button class = "btn btn-primary" (click)="handleAddAccounts(customerId)">Add account</button>
+      <a href="/customers" class = "btn btn-outline-primary" style="margin-left: 3px"><i class ="bi bi-person"></i>Customers</a>
       @if(accounts | async; as accountList){
         @if(accountList.length == 0){
-            <div class="fs-3">{{customer.name}} has no bank accounts. Create a new account.</div>
+            <div class="fs-3">{{customer?.name}} has no bank accounts. Create a new account.</div>
         } @else {
           <table class = "table table-hover">
             <thead>
