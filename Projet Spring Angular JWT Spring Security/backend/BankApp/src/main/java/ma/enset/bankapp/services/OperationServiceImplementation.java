@@ -123,7 +123,7 @@ public class OperationServiceImplementation implements OperationServiceInterface
         BankAccount bankAccount = bankAccountRepository.findById(accountID).orElse(null);
         if(bankAccount == null)
             throw new AccountNotFoundException("Bank account not found");
-        Page<Operation> operations = operationRepository.findByBankAccountIdOrderByDateDesc(
+        Page<Operation> operations = operationRepository.findByBankAccountIdOrderByDateDescIdDesc(
                 bankAccount.getId(), PageRequest.of(page, size));
         AccountHistoryDto accountHistoryDto = new AccountHistoryDto();
 

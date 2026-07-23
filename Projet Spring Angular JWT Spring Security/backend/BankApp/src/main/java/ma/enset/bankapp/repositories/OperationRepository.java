@@ -11,5 +11,5 @@ public interface OperationRepository extends JpaRepository<Operation, Long> {
 
     List<Operation> findByBankAccountId(String accountID);
     List<Operation> findByTransactionID(String transactionID);
-    Page<Operation> findByBankAccountIdOrderByDateDesc (String accountID, Pageable pageable);
+    Page<Operation> findByBankAccountIdOrderByDateDescIdDesc (String accountID, Pageable pageable);
 }
