@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(username, password).subscribe({
       next: (resp) => {
         this.authService.loadProfile(resp)
-        this.router.navigateByUrl("/admin")
+        this.router.navigateByUrl("/app")
       },
       error: (err) => {
         console.error(err);

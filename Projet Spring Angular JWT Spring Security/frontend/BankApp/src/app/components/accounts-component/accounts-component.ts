@@ -57,10 +57,10 @@ export class AccountsComponent implements OnInit {
   }
 
   handleAddAccounts(accountID: string) {
-    this.router.navigateByUrl('/accounts/' + accountID + '/new-account');
+    this.router.navigateByUrl('/app/accounts/' + accountID + '/new-account');
   }
 
   handleOperations(accountID: string) {
-    this.router.navigateByUrl('/operations/' + accountID);
+    this.router.navigateByUrl('/app/operations/' + accountID);
   }
 }

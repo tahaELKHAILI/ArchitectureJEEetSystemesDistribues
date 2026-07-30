@@ -66,7 +66,7 @@ export class AddAccountComponent implements OnInit {
       next: (resp) => {
         alert(`Account was added successfully`);
         this.newAccountFormGroup.reset();
-        this.router.navigateByUrl('/accounts/' + currentAccount.customerID);
+        this.router.navigateByUrl('/app/accounts/' + currentAccount.customerID);
       },
       error: (err) => {
         console.error(err);
@@ -83,7 +83,7 @@ export class AddAccountComponent implements OnInit {
       next: (resp) => {
         alert(`Account was added successfully`);
         this.newAccountFormGroup.reset();
-        this.router.navigateByUrl('/accounts/' + savingAccount.customerID);
+        this.router.navigateByUrl('/app/accounts/' + savingAccount.customerID);
       },
       error: (err) => {
         console.error(err);

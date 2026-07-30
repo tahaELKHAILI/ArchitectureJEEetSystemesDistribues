@@ -31,7 +31,7 @@ export class AddCustomerComponent implements OnInit {
       next: resp => {
         alert(`${customer.name} was added successfully`)
         this.newCustomerFormGroup.reset()
-        this.router.navigateByUrl("/customers")
+        this.router.navigateByUrl('/app/customers');
 
       },
       error: err => {

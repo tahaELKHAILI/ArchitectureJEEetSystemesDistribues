@@ -42,7 +42,7 @@ export class UpdateCustomerComponent implements OnInit {
     this.customerService.updateCustomer(updatedCustomer).subscribe({
       next: (resp) => {
         alert("Update successful");
-        this.router.navigateByUrl('/customers');
+        this.router.navigateByUrl('/app/customers');
       },
       error: (err) => {
         console.error(err);
