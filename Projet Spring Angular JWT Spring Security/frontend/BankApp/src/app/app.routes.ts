@@ -10,6 +10,7 @@ import { AppTemplateComponent } from './components/app-template-component/app-te
 import { authenticationGuard } from './guards/authentication-guard';
 import { authorizationGuard } from './guards/authorization-guard';
 import { NotAuthorizedComponent } from './components/not-authorized-component/not-authorized-component';
+import { HomeScreenComponent } from './components/home-screen-component/home-screen-component';
 
 export const routes: Routes = [
   { component: LoginComponent, path: 'login' },
@@ -28,10 +29,16 @@ export const routes: Routes = [
       },
       { component: UpdateCustomerComponent, path: 'customers/:id' },
       { component: AccountsComponent, path: 'accounts/:id' },
-      { component: AddAccountComponent, path: 'accounts/:id/new-account' },
+      {
+        component: AddAccountComponent,
+        path: 'accounts/:id/new-account',
+        canActivate: [authorizationGuard],
+        data: { role: 'ADMIN' },
+      },
       { component: OperationsComponent, path: 'operations/:id' },
       { component: OperationsComponent, path: 'operations' },
       { component: NotAuthorizedComponent, path: 'notAuthorized' },
+      { component: HomeScreenComponent, path: 'home' },
     ],
   },
 ];

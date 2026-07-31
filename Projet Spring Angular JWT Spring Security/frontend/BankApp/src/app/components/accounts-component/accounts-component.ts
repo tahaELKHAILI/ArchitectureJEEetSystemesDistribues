@@ -6,6 +6,7 @@ import { AccountModel } from '../../models/account-model';
 import { AccountService } from '../../services/account-service';
 import { AsyncPipe, DecimalPipe } from '@angular/common';
 import { CustomerService } from '../../services/customer-service';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-accounts-component',
@@ -24,6 +25,7 @@ export class AccountsComponent implements OnInit {
     private route: ActivatedRoute,
     private accountService: AccountService,
     private customerService: CustomerService,
+    public authService:AuthService,
   ) {
   }
 

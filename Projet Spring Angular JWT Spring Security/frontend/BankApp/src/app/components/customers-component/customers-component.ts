@@ -5,6 +5,7 @@ import { CustomerService } from '../../services/customer-service';
 import { AsyncPipe } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-customers-component',
@@ -21,7 +22,8 @@ export class CustomersComponent implements OnInit {
     private customerService: CustomerService,
     private formBuilder: FormBuilder,
     private changeDetection: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    public authService:AuthService
   ) {}
 
   ngOnInit() {

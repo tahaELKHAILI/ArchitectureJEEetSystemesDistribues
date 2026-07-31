@@ -2,7 +2,7 @@
   <div class="container-fluid">
 
     <!-- Brand -->
-    <a class="navbar-brand fw-bold" href="#">
+    <a class="navbar-brand fw-bold" href="/app/home">
       Bank App
     </a>
 
@@ -25,7 +25,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
         <li class="nav-item">
-          <a class="nav-link active" href="#">Home</a>
+          <a class="nav-link active" href="/app/home">Home</a>
         </li>
 
         <li class="nav-item">
@@ -51,11 +51,13 @@
                 Search Customer
               </a>
             </li>
-            <li>
-              <a class="dropdown-item" href="/app/new-customer">
-                Add Customer
-              </a>
-            </li>
+            @if(authService.authenticationState.roles.includes("ADMIN")){
+              <li>
+                <a class="dropdown-item" href="/app/new-customer">
+                  Add Customer
+                </a>
+              </li>
+            }
           </ul>
         </li>
 

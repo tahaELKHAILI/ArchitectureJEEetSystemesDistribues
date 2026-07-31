@@ -68,8 +68,10 @@
       }
     </div>
 
-    <div class="col col-md-5">
-      <app-transactions-component></app-transactions-component>
-    </div>
+    @if(authService.authenticationState.roles.includes("ADMIN")){
+      <div class="col col-md-5">
+        <app-transactions-component></app-transactions-component>
+      </div>
+    }
   </div>
 </div>

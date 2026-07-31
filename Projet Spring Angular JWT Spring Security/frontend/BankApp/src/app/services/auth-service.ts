@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { AthenticationState } from '../models/athentication-state';
 import { jwtDecode } from 'jwt-decode';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,8 @@ export class AuthService {
     accessToken: '',
   };
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private router:Router) {
     const storedState = localStorage.getItem('authState');
     if (storedState) {
       this.authenticationState = JSON.parse(storedState);
@@ -53,5 +55,7 @@ export class AuthService {
     };
 
     localStorage.removeItem('authState');
+    this.router.navigateByUrl('/login');
+
   }
 }

@@ -6,7 +6,9 @@
       <span><strong>Customer ID: </strong>{{customerId}}</span>
     </div>
     <div class="card-body">
-      <button class = "btn btn-primary" (click)="handleAddAccounts(customerId)">Add account</button>
+      @if(authService.authenticationState.roles.includes("ADMIN")){
+        <button class = "btn btn-primary" (click)="handleAddAccounts(customerId)">Add account</button>
+      }
       <a href="/app/customers" class = "btn btn-outline-primary" style="margin-left: 3px"><i class ="bi bi-person"></i>Customers</a>
       @if(accounts | async; as accountList){
         @if(accountList.length == 0){
