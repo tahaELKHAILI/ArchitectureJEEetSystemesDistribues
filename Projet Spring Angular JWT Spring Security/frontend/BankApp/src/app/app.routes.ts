@@ -14,7 +14,16 @@ import { HomeScreenComponent } from './components/home-screen-component/home-scr
 
 export const routes: Routes = [
   { component: LoginComponent, path: 'login' },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  //{ path: '', redirectTo: '/login', pathMatch: 'full' },
+  {
+    path: '',
+    component: AppTemplateComponent,
+    canActivate: [authenticationGuard],
+    children: [
+      // Automatically show the Home Screen when landing on the root URL
+      { component: HomeScreenComponent, path: '' },
+    ],
+  },
   {
     component: AppTemplateComponent,
     path: 'app',

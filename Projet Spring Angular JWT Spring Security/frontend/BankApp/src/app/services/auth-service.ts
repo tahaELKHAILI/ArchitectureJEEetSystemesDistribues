@@ -58,4 +58,12 @@ export class AuthService {
     this.router.navigateByUrl('/login');
 
   }
+
+  loadLocalToken() {
+    let token = localStorage.getItem('authState');
+
+    if(token){
+      this.loadProfile({"access-token":token})}
+      this.router.navigateByUrl("/app/home")
+  }
 }

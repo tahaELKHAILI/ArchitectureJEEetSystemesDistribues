@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth-service';
 import { Router } from '@angular/router';
 
@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.formLogin = this.fb.group({
-      username: this.fb.control(''),
-      password: this.fb.control(''),
+      username: this.fb.control('', [Validators.required]),
+      password: this.fb.control('', [Validators.required]),
     });
   }
 
@@ -35,7 +35,17 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl("/app/home")
       },
       error: (err) => {
-        console.error(err);
+        if(!this.formLogin.valid){
+        alert("Make sure to enter a username and password")
+        }
+        else{
+          if (err.status == 401) {
+            alert('Wrong username or password.');
+          } else if (err.status == 0) {
+            alert('Server down. Try again later');
+          }
+          console.error(err);
+        }
       },
     });
   }

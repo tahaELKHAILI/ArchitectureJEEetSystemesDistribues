@@ -1,12 +1,13 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account-service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OperationModel } from '../../models/operation-model';
 import { Observable } from 'rxjs';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TransactionsComponent } from '../transactions-component/transactions-component';
 import { AuthService } from '../../services/auth-service';
+import { CustomerModel } from '../../models/customer-model';
 
 @Component({
   selector: 'app-operations',
@@ -26,8 +27,9 @@ export class OperationsComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private cd: ChangeDetectorRef,
-    public authService:AuthService,
-  ) {}
+    public authService: AuthService,
+  ) {
+  }
 
   ngOnInit() {
     this.accountID = this.route.snapshot.params['id'];
