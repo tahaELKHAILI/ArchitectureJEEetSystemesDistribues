@@ -11,6 +11,7 @@ import { authenticationGuard } from './guards/authentication-guard';
 import { authorizationGuard } from './guards/authorization-guard';
 import { NotAuthorizedComponent } from './components/not-authorized-component/not-authorized-component';
 import { HomeScreenComponent } from './components/home-screen-component/home-screen-component';
+import { PageNotFoundComponent } from './components/page-not-found-component/page-not-found-component';
 
 export const routes: Routes = [
   { component: LoginComponent, path: 'login' },
@@ -20,7 +21,6 @@ export const routes: Routes = [
     component: AppTemplateComponent,
     canActivate: [authenticationGuard],
     children: [
-      // Automatically show the Home Screen when landing on the root URL
       { component: HomeScreenComponent, path: '' },
     ],
   },
@@ -48,6 +48,8 @@ export const routes: Routes = [
       { component: OperationsComponent, path: 'operations' },
       { component: NotAuthorizedComponent, path: 'notAuthorized' },
       { component: HomeScreenComponent, path: 'home' },
+      { component: PageNotFoundComponent, path: '**'}
     ],
   },
+  { component: PageNotFoundComponent, path: '**'},
 ];
