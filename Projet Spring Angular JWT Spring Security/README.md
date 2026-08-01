@@ -77,7 +77,13 @@ A full-stack banking management application built with Spring Boot, Angular, Spr
 #### Not authorized
 ![Not authorized](./screenshots/user/UserNotAuthorized.png)
 
-
+### Error handling
+#### Wrong path
+![wrong path](./screenshots/BrokenLinkError.png)
+#### Empty login
+![empty login](./screenshots/EmptyLogin.png)
+### Wrong login
+![wrong login](./screenshots/WrongLogin.png)
 
 ## License
 This project was developed for educational purposes and demonstrates the implementation of a secure banking management system using Spring Boot and Angular.
