@@ -13,6 +13,10 @@ import { SavingAccountCreation } from '../models/saving-account-creation';
 export class AccountService {
   constructor(private http: HttpClient) {}
 
+  public getAccountByID(accountID: String): Observable<AccountModel> {
+    return this.http.get<AccountModel>(environment.backendHost+"/accounts/"+accountID)
+  }
+
   public getAccountsByCustomer(customerID: String): Observable<Array<AccountModel>> {
     return this.http.get<Array<AccountModel>>(
       environment.backendHost + '/accounts/customer/' + customerID,

@@ -1,8 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account-service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { OperationModel } from '../../models/operation-model';
-import { Observable } from 'rxjs';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TransactionsComponent } from '../transactions-component/transactions-component';
@@ -17,6 +16,7 @@ import { CustomerModel } from '../../models/customer-model';
 })
 export class OperationsComponent implements OnInit {
   accountID!: string;
+  customerID!: string;
   accountHistory!: OperationModel;
   protected searchHistoryFormGroup!: FormGroup;
   currentPage: number = 0;
@@ -47,6 +47,8 @@ export class OperationsComponent implements OnInit {
 
   handleGetHistory() {
     this.accountID = this.searchHistoryFormGroup.value['searchAccount'];
+    this.getAccountCustomerID();
+
     this.accountService.accountHistory(this.accountID, this.currentPage, this.pageSize).subscribe({
       next: (resp) => {
         this.accountHistory = resp;
@@ -65,4 +67,17 @@ export class OperationsComponent implements OnInit {
   }
 
   protected readonly Array = Array;
+
+  private getAccountCustomerID() {
+    if(this.accountID != null){
+      this.accountService.getAccountByID(this.accountID).subscribe({
+        next:resp => {
+          this.customerID = resp.customerDto.id;
+        },
+        error:err => {
+          console.error(err)
+        }
+      })
+    }
+  }
 }

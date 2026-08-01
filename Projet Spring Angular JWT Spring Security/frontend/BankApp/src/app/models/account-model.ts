@@ -3,7 +3,13 @@ export interface AccountModel {
   balance: number;
   type: string;
   accountStatus: string;
-  customerID: string;
-  interestRate:number;
-  overdraft:number;
+  customerDto: CustomerDto;
+  interestRate: number;
+  overdraft: number;
+}
+
+export interface CustomerDto {
+  email: string,
+  id: string;
+  name: string;
 }

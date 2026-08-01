@@ -63,7 +63,7 @@ export class CustomersComponent implements OnInit {
   }
 
   handleCustomerAccounts(customer: CustomerModel) {
-    this.router.navigateByUrl('/app/accounts/' + customer.id, { state: customer });
+    this.router.navigateByUrl('/app/accounts/' + customer.id);
   }
 
   handleCustomerUpdate(customer: CustomerModel){
