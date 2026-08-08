@@ -17,18 +17,18 @@ public class CustomerRestController {
     private CustomerServiceImplementation customerServiceImplementation;
 
     @GetMapping("/customers")
-    @PreAuthorize("hasAuthority('SCOPE_USER')")
+    @PreAuthorize("hasAnyAuthority('SCOPE_USER', 'SCOPE_ADMIN')")
     public List<CustomerDto> getAllCustomers(){
         return customerServiceImplementation.getAllCustomers();
     }
 
-    @PreAuthorize("hasAuthority('SCOPE_USER')")
+    @PreAuthorize("hasAnyAuthority('SCOPE_USER', 'SCOPE_ADMIN')")
     @GetMapping("/customers/{id}")
     public CustomerDto getCustomer(@PathVariable(name = "id") String customerID) throws CustomerNotFoundException {
         return customerServiceImplementation.getCustomer(customerID);
     }
 
-    @PreAuthorize("hasAuthority('SCOPE_USER')")
+    @PreAuthorize("hasAnyAuthority('SCOPE_USER', 'SCOPE_ADMIN')")
     @GetMapping("/customers/search")
     public List<CustomerDto> searchCustomer(@RequestParam(name = "keyword", defaultValue = "") String keyword){
         return customerServiceImplementation.searchCustomers(keyword);
